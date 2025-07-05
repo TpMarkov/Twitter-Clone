@@ -24,7 +24,7 @@ const notificationSchema = new mongoose.Schema(
     },
     comment: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Commnet",
+      ref: "Comment",
       default: null,
     },
   },

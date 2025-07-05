@@ -67,8 +67,7 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
   const user = await User.findOne({ clerkId: userId });
 
-  if (!user) return status(404).json({ error: "User not found" });
-
+  if (!user) return res.status(404).json({ error: "User not found" });
   res.status(200).json({ user });
 });
 
@@ -85,34 +84,40 @@ export const followUser = asyncHandler(async (req, res) => {
   if (!currentUser || !targetUser)
     return res.status(404).json({ error: "User not found" });
 
-  const isFollowing = currentUser.followers.includes(targetUserId);
+  const isFollowing = currentUser.following.includes(targetUserId);
 
-  if (isFolowing) {
-    await User.findOneAndUpdate(currentUser._id, {
-      $pull: { following: targetUserId },
-    });
-    await User.findOneAndUpdate(targetUserId, {
-      $pull: { followers: currentUser._id },
-    });
+  if (isFollowing) {
+    await User.findOneAndUpdate(
+      { _id: currentUser._id },
+      { $pull: { following: targetUser._id } }
+    );
+    await User.findOneAndUpdate(
+      { _id: targetUser._id },
+      { $pull: { followers: currentUser._id } }
+    );
   } else {
-    await User.findOneAndUpdate(currentUser._id, {
-      $push: { following: targetUserId },
-    });
-    await User.findOneAndUpdate(targetUserId, {
-      $push: { followers: currentUser._id },
-    });
+    await User.findOneAndUpdate(
+      { _id: currentUser._id },
+      { $push: { following: targetUser._id } }
+    );
+    await User.findOneAndUpdate(
+      { _id: targetUser._id },
+      { $push: { followers: currentUser._id } }
+    );
   }
 
-  // Create notification
-  await Notification.create({
-    from: currentUser._id,
-    to: targetUserId,
-    type: follow,
-  });
+  // Create notification only when following (not unfollowing)
+  if (!isFollowing) {
+    await Notification.create({
+      from: currentUser._id,
+      to: targetUserId,
+      type: "follow",
+    });
+  }
 
   res.status(200).json({
     message: isFollowing
       ? "User successfully unfollowed"
-      : "User successfully followedcd",
+      : "User successfully followed",
   });
 });
