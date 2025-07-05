@@ -14,16 +14,18 @@ const commentSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      maxLenght: 280,
+      maxLength: 280,
     },
-    likes: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-const comment = mongoose.model("Commnet", commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
 export default Comment;

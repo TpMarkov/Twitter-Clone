@@ -24,7 +24,7 @@ const notificationSchema = new mongoose.Schema(
     },
     comment: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Commnet",
+      ref: "Comment",
       default: null,
     },
   },
@@ -34,6 +34,6 @@ const notificationSchema = new mongoose.Schema(
   }
 );
 
-const notification = mongoose.model("Notification", notificationSchema);
+const Notification = mongoose.model("Notification", notificationSchema);
 
 export default Notification;
