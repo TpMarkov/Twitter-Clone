@@ -13,5 +13,3 @@ export const ENV = {
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
   ARCJET_KEY: process.env.ARCJET_KEY,
 };
-
-console.log("Mongo URI:", ENV.MONGO_URI);
