@@ -71,13 +71,13 @@ export const createPost = asyncHandler(async (req, res) => {
     const user = await User.findOne({ clerkId: userId });
     if (!user) return res.status(400).json({ error: "User not found" });
   }
-  const imageUrl = "";
+  let imageUrl = "";
 
   if (imageFile) {
     try {
       const base64Image = `data:${
         imageFile.mimetype
-      }:base64,${imageFile.buffer.toString("base64")}`;
+      };base64,${imageFile.buffer.toString("base64")}`;
 
       const uploadResponse = await cloudinary.uploader.upload(base64Image, {
         folder: "social_media_posts",
@@ -110,6 +110,7 @@ export const likePost = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ clerkId: userId });
   const post = await Post.findById(postId);
+
   if (!user || !post) {
     return res.status(400).json({ error: "User or post not found" });
   }
@@ -126,7 +127,7 @@ export const likePost = asyncHandler(async (req, res) => {
     });
   }
 
-  if ((post.user.toString() !== user._id, toString())) {
+  if (post.user.toString() !== user._id.toString() && !isLiked) {
     await Notification.create({
       from: user._id,
       to: post.user,
