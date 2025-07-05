@@ -1,12 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
-
-dotenv.config();
-
+import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
+import userRoutes from "../src/routes/user.route.js";
 import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 
+dotenv.config();
+
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use(clerkMiddleware());
+app.use("/api/users", userRoutes);
+
 app.get("/", (req, res) => {
   res.send("Hello from server.");
 });
