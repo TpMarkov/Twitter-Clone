@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoutes from "../src/routes/user.route.js";
 import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
+import postRoutes from "../src/routes/post.route.js";
 
 dotenv.config();
 
@@ -15,7 +16,13 @@ app.use(express.json());
 
 app.use(clerkMiddleware());
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
+// error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ error: err.message || "Internal server error" });
+});
 app.get("/", (req, res) => {
   res.send("Hello from server.");
 });
