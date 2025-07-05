@@ -18,12 +18,11 @@ app.use(clerkMiddleware());
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 
-// error hnadling middleware
+// error handling middleware
 app.use((err, req, res, next) => {
-  console.error("Unhandlerd error:", err);
+  console.error("Unhandled error:", err);
   res.status(500).json({ error: err.message || "Internal server error" });
 });
-
 app.get("/", (req, res) => {
   res.send("Hello from server.");
 });

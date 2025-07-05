@@ -23,7 +23,7 @@ export const getPost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
   const post = await Post.findById(postId)
-    .populate("user", "username firstname lastName profilePicture")
+    .populate("user", "username firstName lastName profilePicture")
     .populate({
       path: "comments",
       populate: {
@@ -142,7 +142,7 @@ export const likePost = asyncHandler(async (req, res) => {
 });
 
 export const deletePost = asyncHandler(async (req, res) => {
-  const [userId] = getAuth(req);
+  const { userId } = getAuth(req);
   const { postId } = req.params;
 
   const user = await User.findOne({ clerkId: userId });
