@@ -10,8 +10,15 @@ app.get("/", (req, res) => {
   res.send("Hello from server.");
 });
 
-connectDB();
+const startServer = async () => {
+  try {
+    await connectDB();
 
-app.listen(ENV.PORT, () =>
-  console.log(`Server is running on PORT : ${ENV.PORT} `)
-);
+    app.listen(ENV.PORT, () =>
+      console.log(`Server is running on PORT : ${ENV.PORT} `)
+    );
+  } catch (error) {
+    console.error("Error connecting the server:", error.message);
+  }
+};
+startServer();
