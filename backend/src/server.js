@@ -7,8 +7,6 @@ import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 import postRoutes from "../src/routes/post.route.js";
 
-dotenv.config();
-
 const app = express();
 
 app.use(cors());
