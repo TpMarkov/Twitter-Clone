@@ -21,6 +21,8 @@ app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ error: err.message || "Internal server error" });
 });
+
+//  Greeting message when server is runs with no issues ( can remove later on ...)
 app.get("/", (req, res) => {
   res.send("Hello from server.");
 });
