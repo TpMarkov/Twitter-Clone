@@ -45,7 +45,7 @@ export const createComment = asyncHandler(async (req, res) => {
   });
   //    Crete notification if not commenting on your own post
   if (userId.toString() !== post.user.toString()) {
-    const notification = await Notification({
+    const notification = await Notification.create({
       from: user._id,
       to: post.user,
       type: "comment",
@@ -79,7 +79,7 @@ export const deleteComment = asyncHandler(async (req, res) => {
   });
 
   //    Delete the comment
-  await Comment.findOneAndDelete(commentId);
+  await Comment.findByIdAndDelete(commentId);
 
   return res.status(200).jsonp({ message: "Comment successfully deleted" });
 });
