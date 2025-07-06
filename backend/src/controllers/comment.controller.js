@@ -1,4 +1,5 @@
-import asyncHanndler from "express-async-handler";
+import asyncHandler from "express-async-handler";
+
 import Comment from "../models/comment.model.js";
 import User from "../models/user.model.js";
 import Post from "../models/post.model.js";
@@ -6,7 +7,7 @@ import Notification from "../models/notification.model.js";
 
 import { getAuth } from "@clerk/express";
 
-export const getComments = asyncHanndler(async (req, res) => {
+export const getComments = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
   const comments = await Comment.find({ post: postId })
@@ -16,7 +17,7 @@ export const getComments = asyncHanndler(async (req, res) => {
   res.status(200).json({ comments });
 });
 
-export const createComment = asyncHanndler(async (req, res) => {
+export const createComment = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
   const { postId } = req.params;
   const { content } = req.body;
@@ -32,17 +33,16 @@ export const createComment = asyncHanndler(async (req, res) => {
     return res.status(400).json({ error: "Post or user not found" });
 
   // Create the comment
+  // Create the comment
   const comment = await Comment.create({
-    user: userId,
+    user: user._id,
     post: postId,
     content,
   });
-
   // Link the comment with the current post
-  await Comment.findByIdAndUpdate(postId, {
+  await Post.findByIdAndUpdate(postId, {
     $push: { comments: comment._id },
   });
-
   //    Crete notification if not commenting on your own post
   if (userId.toString() !== post.user.toString()) {
     const notification = await Notification({
@@ -57,7 +57,7 @@ export const createComment = asyncHanndler(async (req, res) => {
   res.status(201).json({ comment });
 });
 
-export const deleteComment = asyncHanndler(async (req, res) => {
+export const deleteComment = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
   const { commentId } = req.params;
 
@@ -65,8 +65,7 @@ export const deleteComment = asyncHanndler(async (req, res) => {
   const comment = await Comment.findById(commentId);
 
   if (!comment || !user)
-    return res.status(400).json({ erro: "User or comment not found" });
-
+    return res.status(400).json({ error: "User or comment not found" });
   //    Check comment is user's own one
   if (comment.user.toString() !== user._id.toString()) {
     return res
