@@ -1,11 +1,11 @@
 import express from "express";
-import dotenv from "dotenv";
 import { clerkMiddleware } from "@clerk/express";
 import cors from "cors";
-import userRoutes from "../src/routes/user.route.js";
 import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
+import userRoutes from "../src/routes/user.route.js";
 import postRoutes from "../src/routes/post.route.js";
+import commentRoutes from "../src/routes/comment.route.js";
 
 const app = express();
 
@@ -13,8 +13,14 @@ app.use(cors());
 app.use(express.json());
 
 app.use(clerkMiddleware());
+//  Users routes
 app.use("/api/users", userRoutes);
+
+//  Post routes
 app.use("/api/posts", postRoutes);
+
+//  Comments routes
+app.use("/api/comments", commentRoutes);
 
 // error handling middleware
 app.use((err, req, res, next) => {
