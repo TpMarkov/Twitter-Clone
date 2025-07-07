@@ -20,7 +20,7 @@ export const arcjetMiddleware = async (req, res, next) => {
         });
       } else {
         res.status(403).json({
-          error: "Forbiden",
+          error: "Forbidden",
           message: "Access denied by security policy",
         });
       }
