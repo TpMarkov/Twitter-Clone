@@ -1,5 +1,6 @@
-import { Stack } from "expo-router";
-
-export default function RootLayout() {
-  return <Stack />;
+import "../global.css";
+import Index from "./index";
+export default function App() {
+  /* Your App */
+  return <Index></Index>;
 }
