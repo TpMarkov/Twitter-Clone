@@ -14,12 +14,12 @@ export const arcjetMiddleware = async (req, res, next) => {
           message: "Rate limit exceeded. Please try again later",
         });
       } else if (decision.reason.isBot()) {
-        res.status(403).json({
+        return res.status(403).json({
           error: "Bot accesss denied",
           message: "Automated requests are not allowed",
         });
       } else {
-        res.status(403).json({
+        return res.status(403).json({
           error: "Forbiden",
           message: "Access denied by security policy",
         });
