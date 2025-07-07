@@ -19,7 +19,8 @@ export const arcjetMiddleware = async (req, res, next) => {
           message: "Automated requests are not allowed",
         });
       } else {
-        return res.status(403).json({
+
+        res.status(403).json({
           error: "Forbidden",
           message: "Access denied by security policy",
         });
