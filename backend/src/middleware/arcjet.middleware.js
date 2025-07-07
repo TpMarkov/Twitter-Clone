@@ -15,12 +15,12 @@ export const arcjetMiddleware = async (req, res, next) => {
         });
       } else if (decision.reason.isBot()) {
         return res.status(403).json({
-          error: "Bot accesss denied",
+          error: "Bot access denied",
           message: "Automated requests are not allowed",
         });
       } else {
         return res.status(403).json({
-          error: "Forbiden",
+          error: "Forbidden",
           message: "Access denied by security policy",
         });
       }
