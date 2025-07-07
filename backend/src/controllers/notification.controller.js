@@ -3,10 +3,10 @@ import { getAuth } from "@clerk/express";
 import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
 
-export const deleteNotification = asyncHandler(async (req, res) => {
+export const getNotifications = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
 
-  const user = await User.findOne({ clerId: userId });
+  const user = await User.findOne({ clerkId: userId });
   if (!user) return res.status(404).json({ error: "User not found" });
 
   const notifications = await Notification.find({
@@ -14,26 +14,26 @@ export const deleteNotification = asyncHandler(async (req, res) => {
   })
     .sort({ addedAt: -1 })
     .populate("from", "username firstName lastName profilePicture")
-    .populate("post", "contnt image")
+    .populate("post", "content image")
     .populate("comment", "content");
 
   res.status(200).json({ notifications });
 });
 
-export const getNotifications = asyncHandler(async (req, res) => {
+export const deleteNotification = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
   const { notificationId } = req.params;
 
   const user = await User.findOne({ clerkId: userId });
   if (!user) return res.status(404).json({ error: "User not found" });
 
-  const notification = await Notification.findByIdAndDelete({
-    if: notificationId,
+  const notification = await Notification.findOneAndDelete({
+    _id: notificationId,
     to: user._id,
   });
 
   if (!notification)
     return res.status(404).json({ error: "Notification not found" });
 
-  res.status(201).json({ message: "Notification deleted successfully" });
+  res.status(200).json({ message: "Notification deleted successfully" });
 });

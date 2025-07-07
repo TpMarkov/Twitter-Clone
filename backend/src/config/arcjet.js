@@ -10,7 +10,7 @@ export const aj = arcjet({
     shield({ mode: "LIVE" }),
     detectBot({
       mode: "LIVE",
-      allow: ["GATEGORY:SEARCH_ENGINE"],
+      allow: ["CATEGORY:SEARCH_ENGINE"],
     }),
     tokenBucket({
       mode: "LIVE",
