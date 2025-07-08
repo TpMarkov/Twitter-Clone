@@ -9,7 +9,7 @@ export default function RootLayoutNav() {
     <ClerkProvider tokenCache={tokenCache}>
       <Stack>
         <Stack.Screen
-          name="auth"
+          name="(auth)"
           options={{ headerShown: false }}
         ></Stack.Screen>
       </Stack>
