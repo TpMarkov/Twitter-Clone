@@ -1,6 +1,18 @@
 import "../global.css";
-import Index from "./index";
-export default function App() {
+import { ClerkProvider } from "@clerk/clerk-expo";
+import { tokenCache } from "@clerk/clerk-expo/token-cache";
+import { Stack } from "expo-router";
+
+export default function RootLayoutNav() {
   /* Your App */
-  return <Index></Index>;
+  return (
+    <ClerkProvider tokenCache={tokenCache}>
+      <Stack>
+        <Stack.Screen
+          name="auth"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+      </Stack>
+    </ClerkProvider>
+  );
 }
