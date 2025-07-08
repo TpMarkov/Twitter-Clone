@@ -1,5 +1,3 @@
-import { ClassNames } from "@emotion/react";
-import { Button } from "@react-navigation/elements";
 import { useState } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 
