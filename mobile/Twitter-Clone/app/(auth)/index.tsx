@@ -1,11 +1,5 @@
-import { useSocialAuth } from "@/hooks/useSocialAuth";
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
+import { useSocialAuth } from "../hooks/useSocialAuth";
 
 export default function Index() {
   const { isLoading, handleSocialAuth } = useSocialAuth();
@@ -35,20 +29,16 @@ export default function Index() {
                 elevation: 2,
               }}
             >
-              {isLoading ? (
-                <ActivityIndicator size="small" color="#4285F4" />
-              ) : (
-                <View className="flex-row items-center justify-center">
-                  <Image
-                    source={require("../../assets/images/google.png")}
-                    className="size-10 mr-3"
-                    resizeMode="contain"
-                  ></Image>
-                  <Text className="text-black font-medium text-base">
-                    Continue with Google
-                  </Text>
-                </View>
-              )}
+              <View className="flex-row items-center justify-center">
+                <Image
+                  source={require("../../assets/images/google.png")}
+                  className="size-10 mr-3"
+                  resizeMode="contain"
+                ></Image>
+              </View>
+              <Text className="text-black font-medium text-base">
+                Continue with Google
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="flex-row items-center justify-center bg-white border border-gray-300 rounded-full py-3 px-6"
@@ -62,34 +52,18 @@ export default function Index() {
                 elevation: 2,
               }}
             >
-              {isLoading ? (
-                <ActivityIndicator
-                  size="small"
-                  color="#000000"
-                ></ActivityIndicator>
-              ) : (
-                <View className="flex-row items-center justify-center">
-                  <Image
-                    source={require("../../assets/images/apple.png")}
-                    className="size-8 mr-3"
-                    resizeMode="contain"
-                  ></Image>
-                  <Text className="text-black font-medium text-base">
-                    Continue with Apple
-                  </Text>
-                </View>
-              )}
+              <View className="flex-row items-center justify-center">
+                <Image
+                  source={require("../../assets/images/apple.png")}
+                  className="size-10 mr-3"
+                  resizeMode="contain"
+                ></Image>
+              </View>
+              <Text className="text-black font-medium text-base">
+                Continue with Apple
+              </Text>
             </TouchableOpacity>
           </View>
-
-          <Text className="text-center text-gray-500 text-xs leading-4 mt-6 px-2">
-            By signing up, you agree to our{" "}
-            <Text className="text-blue-500">Terms</Text>
-            {", "}
-            <Text className="text-blue-500">Privacy Policy</Text>
-            {", and "}
-            <Text className="text-blue-500">Cookie Use</Text>
-          </Text>
         </View>
       </View>
     </View>
