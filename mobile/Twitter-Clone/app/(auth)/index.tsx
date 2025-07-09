@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
+import { useSocialAuth } from "../hooks/useSocialAuth";
 
 export default function Index() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, handleSocialAuth } = useSocialAuth();
 
   return (
     <View className="flex-1 bg-white">
