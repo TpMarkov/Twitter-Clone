@@ -8,16 +8,10 @@ import {
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
+import { TRENDING_TOPICS } from "../data/trending_topics";
 
 //  TO-DO add searching implementation in the back-end and complete in this component
 
-const TRENDING_TOPICS = [
-  { topic: "#ReactNative", tweets: "125K" },
-  { topic: "#TypeScript", tweets: "89K" },
-  { topic: "#WebDevelopment", tweets: "234K" },
-  { topic: "#AI", tweets: "567K" },
-  { topic: "#TechNews", tweets: "98K" },
-];
 const SearchScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -29,6 +23,11 @@ const SearchScreen = () => {
             placeholder="Search Twitter"
             className="flex-1 ml-3 text-base"
             placeholderTextColor={"#657786"}
+            accessibilityLabel="Search Twitter"
+            accessibilityHint="Enter text to search for posts, users, or topics"
+            returnKeyType="search"
+            autoCorrect={false}
+            autoCapitalize="none"
           />
         </View>
       </View>
