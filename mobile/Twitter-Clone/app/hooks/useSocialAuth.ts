@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useSSO } from "@clerk/clerk-expo";
+import { useState } from "react";
 import { Alert } from "react-native";
 
 export const useSocialAuth = () => {
@@ -13,8 +13,8 @@ export const useSocialAuth = () => {
       if (createdSessionId && setActive) {
         await setActive({ session: createdSessionId });
       }
-    } catch (error) {
-      console.log("Error in social auth:", error);
+    } catch (err) {
+      console.log("Error in social auth", err);
       const provider = strategy === "oauth_google" ? "Google" : "Apple";
       Alert.alert(
         "Error",
