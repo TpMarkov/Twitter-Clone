@@ -1,7 +1,8 @@
-import { signOut, useClerk } from "@clerk/clerk-expo";
 import { View, Text, Button } from "react-native";
+import React from "react";
+import { useClerk } from "@clerk/clerk-expo";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const { signOut } = useClerk();
 
   return (
@@ -10,4 +11,6 @@ export default function HomeScreen() {
       <Button onPress={() => signOut()} title="logout"></Button>
     </View>
   );
-}
+};
+
+export default HomeScreen;

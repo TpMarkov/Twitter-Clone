@@ -7,8 +7,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 
-export default function Authentication() {
-  const { handleSocialAuth, isLoading } = useSocialAuth();
+export default function Index() {
+  const { isLoading, handleSocialAuth } = useSocialAuth();
 
   return (
     <View className="flex-1 bg-white">
