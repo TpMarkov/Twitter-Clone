@@ -12,10 +12,10 @@ export default function RootLayoutNav() {
           name="(auth)"
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="(tabs)"
           options={{ headerShown: false }}
-        ></Stack.Screen>
+        ></Stack.Screen> */}
       </Stack>
     </ClerkProvider>
   );
